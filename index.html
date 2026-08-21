@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON &middot; CSV Editor</title>
+<script>
+(function () {
+  var k = 'theme', v = null;
+  try { v = localStorage.getItem(k); } catch (e) {}
+  var t = (v === 'dark' || v === 'light') ? v : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.dataset.theme = t;
+})();
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <h1>JSON &middot; CSV Editor</h1>
+  <div class="header-right">
+    <button id="themeBtn" class="btn small ghost">Dark mode</button>
+    <div class="header-actions" id="headerActions" hidden>
+      <span class="file-badge" id="fileBadge"></span>
+      <button id="exportBtn" class="btn primary">Download</button>
+      <button id="copyBtn" class="btn">Copy</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="tabbar" class="tabbar" hidden>
+    <div id="tabs" class="tabs"></div>
+    <button id="newTabBtn" class="btn small ghost">+ New</button>
+  </section>
+
+  <section id="dropzone" class="dropzone" title="Drop a file here">
+    <input type="file" id="fileInput" accept=".csv,.tsv,.json,.jsonl,.txt" hidden>
+    <div class="dropzone-inner">
+      <div class="drop-icon">&#8681;</div>
+      <p><strong>Drag &amp; drop</strong> a CSV, TSV, JSON or JSONL file here</p>
+      <p class="muted">or click to browse, or paste the text</p>
+      <div class="empty-actions">
+        <button class="btn" id="browseBtn">Choose file&hellip;</button>
+        <button class="btn" id="pasteBtn">Paste text&hellip;</button>
+        <button class="btn ghost" id="newCsvBtn">Blank CSV</button>
+        <button class="btn ghost" id="newJsonBtn">Blank JSON</button>
+        <button class="btn ghost" id="sampleCsvBtn">Sample CSV</button>
+        <button class="btn ghost" id="sampleJsonBtn">Sample JSON</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="editorSection" hidden>
+    <div id="editorContainer"></div>
+  </section>
+</main>
+
+<dialog id="pasteDialog">
+  <form method="dialog">
+    <h2>Paste data</h2>
+    <textarea id="pasteText" rows="12" spellcheck="false" placeholder="Paste CSV, TSV, JSON or JSONL here&hellip;"></textarea>
+    <div class="dialog-actions">
+      <button value="cancel" class="btn">Cancel</button>
+      <button id="pasteOk" class="btn primary">Load</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/csv.js"></script>
+<script src="js/table-editor.js"></script>
+<script src="js/json-tree.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
