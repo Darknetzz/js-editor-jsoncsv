@@ -1,5 +1,8 @@
 # js-editor-jsoncsv
 
+<p align="center"><img src="docs/images/banner-gradient.png" alt="js-editor-jsoncsv" width="720"></p>
+
+
 A tiny, dependency-free, browser-based editor for **CSV / TSV / JSON / JSONL** files.
 Drag a file in, edit it in a table or tree view, and export it back out. Everything runs
 locally in your browser — no server, no uploads, no build step.
